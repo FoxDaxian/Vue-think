@@ -1056,6 +1056,8 @@
         return value
       },
       set: function reactiveSetter(newVal) {
+        console.log(newVal);
+        console.log(val);
         var value = getter ? getter.call(obj) : val;
         /* eslint-disable no-self-compare */
         if (newVal === value || (newVal !== newVal && value !== value)) {
@@ -2429,7 +2431,6 @@
   /*  */
 
   function initProvide(vm) {
-    console.log('执行initProvide');
     var provide = vm.$options.provide;
     if (provide) {
       vm._provided = typeof provide === 'function'
@@ -2439,7 +2440,6 @@
   }
 
   function initInjections(vm) {
-    console.log('执行initInjections，在data和props之前');
     var result = resolveInject(vm.$options.inject, vm);
     if (result) {
       toggleObserving(false);
@@ -3478,7 +3478,6 @@
   /*  */
 
   function initRender(vm) {
-    console.log('执行initRender');
     vm._vnode = null; // the root of the child tree
     vm._staticTrees = null; // v-once cached trees
     var options = vm.$options;
@@ -3745,7 +3744,6 @@
   /*  */
 
   function initEvents(vm) {
-    console.log('执行initEvents, 初始化_events');
     vm._events = Object.create(null);
     vm._hasHookEvent = false;
     // init parent attached events
@@ -3892,7 +3890,6 @@
   }
 
   function initLifecycle(vm) {
-    console.log('执行initLifecycle, 父组件 root children refs相关定义，以及当前所属生命周期的状态，比如是否mounted，是否destory等');
     var options = vm.$options;
 
     // locate first non-abstract parent
@@ -3920,6 +3917,7 @@
 
   function lifecycleMixin(Vue) {
     Vue.prototype._update = function (vnode, hydrating) {
+        console.log('=====', vnode, hydrating, '这里是_update');
       var vm = this;
       var prevEl = vm.$el;
       var prevVnode = vm._vnode;
@@ -4050,6 +4048,7 @@
       };
     } else {
       updateComponent = function () {
+        console.log('这里是更新视图的其中一部分');
         vm._update(vm._render(), hydrating);
       };
     }
@@ -4425,6 +4424,7 @@
     this.expression = expOrFn.toString();
     // parse expression for getter
     if (typeof expOrFn === 'function') {
+        console.log('看看watcher构造函数的 getter 是从哪里来的');
       this.getter = expOrFn;
     } else {
       this.getter = parsePath(expOrFn);
@@ -4451,6 +4451,7 @@
     var value;
     var vm = this.vm;
     try {
+        console.log(this.getter, '====');
       value = this.getter.call(vm, vm);
     } catch (e) {
       if (this.user) {
@@ -4516,6 +4517,7 @@
     } else if (this.sync) {
       this.run();
     } else {
+        console.log('watch 的 update ');
       queueWatcher(this);
     }
   };
@@ -4609,7 +4611,6 @@
   }
 
   function initState(vm) {
-    console.log('执行initState, 进行props methods data computed weatch的初始化');
     vm._watchers = [];
     var opts = vm.$options;
     if (opts.props) { initProps(vm, opts.props); }
@@ -4937,7 +4938,6 @@
   function initMixin(Vue) {
     // 挂载_init方法
     Vue.prototype._init = function (options) {
-      console.log('执行vue._init方法');
       var vm = this;
       // a uid
       vm._uid = uid$3++;
@@ -4976,12 +4976,10 @@
       initLifecycle(vm);
       initEvents(vm);
       initRender(vm);
-      console.log('生命周期：beforeCreate');
       callHook(vm, 'beforeCreate');
       initInjections(vm); // resolve injections before data/props
       initState(vm);
       initProvide(vm); // resolve provide after data/props
-      console.log('生命周期：created');
       callHook(vm, 'created');
 
       /* istanbul ignore if */
@@ -4994,7 +4992,6 @@
       if (vm.$options.el) {
         vm.$mount(vm.$options.el);
       }
-      console.log('vue._init方法结束了');
     };
   }
 
@@ -5060,7 +5057,6 @@
     ) {
       warn('Vue is a constructor and should be called with the `new` keyword');
     }
-    console.log(options, '第一步： new Vue的时候传递的参数，然后把参数传给_init');
     this._init(options);
   }
 
@@ -5834,13 +5830,18 @@
     return map
   }
 
+  // createPatchFunction从这里开始
   function createPatchFunction(backend) {
     var i, j;
     var cbs = {};
 
     var modules = backend.modules;
     var nodeOps = backend.nodeOps;
+    console.log(modules, 'modules');
+    console.log(nodeOps, 'nodeOps');
+    // __patch__
 
+    // hooks = ['create', 'activate', 'update', 'remove', 'destroy'];
     for (i = 0; i < hooks.length; ++i) {
       cbs[hooks[i]] = [];
       for (j = 0; j < modules.length; ++j) {
@@ -5849,6 +5850,7 @@
         }
       }
     }
+    console.log(cbs, 'cbs');
 
     function emptyNodeAt(elm) {
       return new VNode(nodeOps.tagName(elm).toLowerCase(), {}, [], undefined, elm)
@@ -5890,6 +5892,9 @@
 
     var creatingElmInVPre = 0;
 
+    // createElm 通过判断有没有tag来决定是否append
+    // createChildren也是先判断时候有tag，然后再调用createElm或者创建具体的textnode
+    
     function createElm(
       vnode,
       insertedVnodeQueue,
@@ -5916,6 +5921,7 @@
       var data = vnode.data;
       var children = vnode.children;
       var tag = vnode.tag;
+      console.log(tag, vnode, 'vnode.tag');
       if (isDef(tag)) {
         {
           if (data && data.pre) {
@@ -5935,6 +5941,7 @@
           ? nodeOps.createElementNS(vnode.ns, tag)
           : nodeOps.createElement(tag, vnode);
         setScope(vnode);
+        console.log(vnode, '===vnode');
 
         /* istanbul ignore if */
         {
@@ -8434,6 +8441,7 @@
   // the directive module should be applied last, after all
   // built-in modules have been applied.
   var modules = platformModules.concat(baseModules);
+
 
   var patch = createPatchFunction({ nodeOps: nodeOps, modules: modules });
 

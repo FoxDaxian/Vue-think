@@ -8,8 +8,22 @@
     </head>
     <body>
         <script>
-            const comment = document.createComment('这是一行注释');
-            document.body.appendChild(comment);
+            version1 = '2.10.9';
+            version2 = '2.10.1';
+            const fn = () => {
+                version1 = version1.split('.');
+                version2 = version2.split('.');
+                const length = version1.length;
+                let curPart = length;
+                while (curPart--) {
+                    const curIndex = length - curPart - 1;
+                    if (version1[curIndex] > version2[curIndex]) {
+                        return true
+                    }
+                }
+                return false;
+            };
+            console.log(fn(version1, version2));
         </script>
     </body>
 </html>
