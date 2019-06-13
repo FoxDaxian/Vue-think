@@ -4409,6 +4409,7 @@
       this.user = !!options.user;
       this.lazy = !!options.lazy;
       this.sync = !!options.sync;
+      // 这个是 beforeUpdate 钩子
       this.before = options.before;
     } else {
       this.deep = this.user = this.lazy = this.sync = false;
@@ -4884,6 +4885,9 @@
     // flow somehow has problems with directly declared definition object
     // when using Object.defineProperty, so we have to procedurally build up
     // the object here.
+    
+    // 如果直接使用Object.defineProperty会导致报错，所以曲线救国
+    // 间接扩展Vue的原型对象
     var dataDef = {};
     dataDef.get = function () { return this._data };
     var propsDef = {};
@@ -4900,12 +4904,15 @@
         warn("$props is readonly.", this);
       };
     }
+    // 定义 data 和 props
     Object.defineProperty(Vue.prototype, '$data', dataDef);
     Object.defineProperty(Vue.prototype, '$props', propsDef);
 
+    // 这块是什么
     Vue.prototype.$set = set;
     Vue.prototype.$delete = del;
 
+    // 定义$watch
     Vue.prototype.$watch = function (
       expOrFn,
       cb,
@@ -4943,6 +4950,7 @@
       vm._uid = uid$3++;
 
       var startTag, endTag;
+      // 根据performance api 来获取性能指标，待完善
       /* istanbul ignore if */
       if (config.performance && mark) {
         startTag = "vue-perf-start:" + (vm._uid);
@@ -5830,6 +5838,9 @@
     return map
   }
 
+  // =====
+  // =====
+  // =====
   // createPatchFunction从这里开始
   function createPatchFunction(backend) {
     var i, j;
@@ -6323,6 +6334,10 @@
           nodeOps.setTextContent(elm, '');
         }
       } else if (oldVnode.text !== vnode.text) {
+        console.log(elm, '====elm是什么');
+
+
+        
         nodeOps.setTextContent(elm, vnode.text);
       }
       if (isDef(data)) {
@@ -6558,6 +6573,10 @@
       return vnode.elm
     }
   }
+  // =====
+  // =====
+  // =====
+  // createPatchFunction从这里结束
 
   /*  */
 
