@@ -4402,6 +4402,7 @@
     if (isRenderWatcher) {
       vm._watcher = this;
     }
+    // vm._watchers 是在 stateMixin
     vm._watchers.push(this);
     // options
     if (options) {
