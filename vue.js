@@ -490,6 +490,7 @@
    */
   function isReserved(str) {
     var c = (str + '').charCodeAt(0);
+    // % 和 _
     return c === 0x24 || c === 0x5F
   }
 
@@ -748,6 +749,7 @@
       subs.sort(function (a, b) { return a.id - b.id; });
     }
     for (var i = 0, l = subs.length; i < l; i++) {
+      console.log(subs[i], '更新的时候出发的');
       subs[i].update();
     }
   };
@@ -950,6 +952,7 @@
   Observer.prototype.walk = function walk(obj) {
     var keys = Object.keys(obj);
     for (var i = 0; i < keys.length; i++) {
+      console.log(obj, keys[i], '初始化的时候');
       defineReactive$$1(obj, keys[i]);
     }
   };
@@ -1056,8 +1059,8 @@
         return value
       },
       set: function reactiveSetter(newVal) {
-        console.log(newVal);
-        console.log(val);
+        // console.log(newVal);
+        // console.log(val);
         var value = getter ? getter.call(obj) : val;
         /* eslint-disable no-self-compare */
         if (newVal === value || (newVal !== newVal && value !== value)) {
@@ -3917,7 +3920,6 @@
 
   function lifecycleMixin(Vue) {
     Vue.prototype._update = function (vnode, hydrating) {
-        console.log('=====', vnode, hydrating, '这里是_update');
       var vm = this;
       var prevEl = vm.$el;
       var prevVnode = vm._vnode;
@@ -3928,6 +3930,7 @@
       if (!prevVnode) {
         // initial render
         vm.$el = vm.__patch__(vm.$el, vnode, hydrating, false /* removeOnly */);
+        console.log(vm.$el, 'vm.$el');
       } else {
         // updates
         vm.$el = vm.__patch__(prevVnode, vnode);
@@ -4048,7 +4051,7 @@
       };
     } else {
       updateComponent = function () {
-        console.log('这里是更新视图的其中一部分');
+        console.log(vm._render());
         vm._update(vm._render(), hydrating);
       };
     }
@@ -4272,6 +4275,7 @@
     //    user watchers are created before the render watcher)
     // 3. If a component is destroyed during a parent component's watcher run,
     //    its watchers can be skipped.
+    console.log(queue, 'queue是什么也 ');
     queue.sort(function (a, b) { return a.id - b.id; });
 
     // do not cache length because more watchers might be pushed
@@ -4403,6 +4407,7 @@
       vm._watcher = this;
     }
     // vm._watchers 是在 stateMixin
+    console.log(this, '==');
     vm._watchers.push(this);
     // options
     if (options) {
@@ -4419,6 +4424,7 @@
     this.id = ++uid$2; // uid for batching
     this.active = true;
     this.dirty = this.lazy; // for lazy watchers
+    // 依赖相关
     this.deps = [];
     this.newDeps = [];
     this.depIds = new _Set();
@@ -4426,7 +4432,7 @@
     this.expression = expOrFn.toString();
     // parse expression for getter
     if (typeof expOrFn === 'function') {
-        console.log('看看watcher构造函数的 getter 是从哪里来的');
+        // console.log('看看watcher构造函数的 getter 是从哪里来的');
       this.getter = expOrFn;
     } else {
       this.getter = parsePath(expOrFn);
@@ -4453,7 +4459,7 @@
     var value;
     var vm = this.vm;
     try {
-        console.log(this.getter, '====');
+        // console.log(this.getter, '====');
       value = this.getter.call(vm, vm);
     } catch (e) {
       if (this.user) {
@@ -4519,7 +4525,6 @@
     } else if (this.sync) {
       this.run();
     } else {
-        console.log('watch 的 update ');
       queueWatcher(this);
     }
   };
@@ -4693,6 +4698,8 @@
     var keys = Object.keys(data);
     var props = vm.$options.props;
     var methods = vm.$options.methods;
+    console.log(props);
+    console.log(methods, 'methodsmethods');
     var i = keys.length;
     while (i--) {
       var key = keys[i];
@@ -5844,13 +5851,14 @@
   // =====
   // createPatchFunction从这里开始
   function createPatchFunction(backend) {
+    console.log(backend, 'backend');
     var i, j;
     var cbs = {};
 
     var modules = backend.modules;
     var nodeOps = backend.nodeOps;
-    console.log(modules, 'modules');
-    console.log(nodeOps, 'nodeOps');
+    // console.log(modules, 'modules');
+    // console.log(nodeOps, 'nodeOps');
     // __patch__
 
     // hooks = ['create', 'activate', 'update', 'remove', 'destroy'];
@@ -5862,7 +5870,7 @@
         }
       }
     }
-    console.log(cbs, 'cbs');
+    // console.log(cbs, 'cbs');
 
     function emptyNodeAt(elm) {
       return new VNode(nodeOps.tagName(elm).toLowerCase(), {}, [], undefined, elm)
@@ -5926,14 +5934,15 @@
       }
 
       vnode.isRootInsert = !nested; // for transition enter check
+      console.log(parentElm, '312');
       if (createComponent(vnode, insertedVnodeQueue, parentElm, refElm)) {
         return
       }
+      console.log(parentElm, '123');
 
       var data = vnode.data;
       var children = vnode.children;
       var tag = vnode.tag;
-      console.log(tag, vnode, 'vnode.tag');
       if (isDef(tag)) {
         {
           if (data && data.pre) {
@@ -5953,7 +5962,7 @@
           ? nodeOps.createElementNS(vnode.ns, tag)
           : nodeOps.createElement(tag, vnode);
         setScope(vnode);
-        console.log(vnode, '===vnode');
+        // console.log(vnode, '===vnode');
 
         /* istanbul ignore if */
         {
@@ -6335,10 +6344,7 @@
           nodeOps.setTextContent(elm, '');
         }
       } else if (oldVnode.text !== vnode.text) {
-        console.log(elm, '====elm是什么');
-
-
-        
+        // console.log(elm, '====elm是什么');
         nodeOps.setTextContent(elm, vnode.text);
       }
       if (isDef(data)) {
@@ -6493,6 +6499,9 @@
             // mounting to a real element
             // check if this is server-rendered content and if we can perform
             // a successful hydration.
+            console.log(oldVnode, 'oldVnode');
+            console.log(oldVnode.nodeType);
+            console.log(oldVnode.hasAttribute(SSR_ATTR));
             if (oldVnode.nodeType === 1 && oldVnode.hasAttribute(SSR_ATTR)) {
               oldVnode.removeAttribute(SSR_ATTR);
               hydrating = true;
@@ -6514,11 +6523,13 @@
             // either not server-rendered, or hydration failed.
             // create an empty node and replace it
             oldVnode = emptyNodeAt(oldVnode);
+            console.log(oldVnode, 'oldVnodeoldVnode');
           }
 
           // replacing existing element
           var oldElm = oldVnode.elm;
           var parentElm = nodeOps.parentNode(oldElm);
+          console.log(parentElm, 'parentElm');
 
           // create new node
           createElm(
@@ -6532,6 +6543,7 @@
           );
 
           // update parent placeholder node element, recursively
+          
           if (isDef(vnode.parent)) {
             var ancestor = vnode.parent;
             var patchable = isPatchable(vnode);

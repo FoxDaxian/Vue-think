@@ -2,44 +2,53 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <meta name="viewport" content="initial-scale=1" />
         <title>Document</title>
+        <style>
+            * {
+                margin: 0;
+            }
+            .box {
+                width: 7.5rem;
+                height: 1rem;
+                background-color: green;
+                box-sizing: border-box;
+            }
+            .test{
+                height: 1rem;
+                width: 50vw;
+                background-color: red;
+                margin-top: 50px;
+                margin-left: 0.4rem;
+            }
+            .btn{
+                height: 1px;
+                width: 50vw;
+                background-color: #000;
+                margin-top: 20px;
+                margin-left: 20px;
+            }
+        </style>
     </head>
     <body>
+        <div class="box"></div>
+        <div class="test"></div>
+        <div class="btn"></div>
         <script>
-            // https://juejin.im/entry/58ba9cb5128fe100643da2cc
-            
-            console.log('performance: ', performance);
-            // console.log(performance.navigation); // 页面是加载还是刷新、发生了多少次重定向等等
-            console.log(performance.timing); // 包含延迟相关的性能信息
-            // console.log(performance.memory); // 基本内存使用情况
-            // console.log(performance.timeOrigin); // 返回当前的时间戳，比Date.now要更精准
-            // console.log(performance);
-            // performance.onresourcetimingbufferfull = () => {
-            //     console.log('缓存区已满');
-            // } // 当资源时间性能缓冲区已满时触发
-            // performance.getEntriesByType // 通过type获取性能条目。如mark、measure等
-            // performance.getEntriesByName // 通过那么获取性能条目。
-
-            
-            // mark 标记
-            // measure测量
-            // clear删除
-            // const start = 'start';
-            // const end = 'end';
-            // performance.mark(start);
-            // setTimeout(function() {
-            //     setTimeout(function() {
-            //         performance.mark(end);
-            //         performance.measure('测试', start, end);
-            //         console.log(performance.getEntriesByType('mark'));
-            //         performance.clearMarks(start);
-            //         performance.clearMarks(end);
-            //         console.log(performance.getEntriesByType('mark'));
-            //         console.log(performance.getEntriesByName('测试'));
-            //     }, 500);
-            // }, 1000);
+            const meta = document.querySelector('meta[name="viewport"]');;
+            const html = document.documentElement;
+            const cliW = html.clientWidth;
+            const dpr = window.devicePixelRatio || 1;
+            meta.setAttribute('name', 'viewport');
+            meta.setAttribute(
+                'content',
+                `width=${cliW * dpr}, initial-scale=${1 /
+                    dpr} ,maximum-scale=${1 / dpr}, minimum-scale=${1 /
+                    dpr},user-scalable=no`
+            );
+            html.setAttribute('data-dpr', dpr);
+            html.style.fontSize = 100 / 750 * cliW * dpr + 'px';
         </script>
     </body>
 </html>

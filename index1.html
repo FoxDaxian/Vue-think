@@ -17,14 +17,22 @@
         window.onload = () => {
             app = new Vue({
                 el: '#app',
+                props: {
+                    testprops: '测试props'
+                },
                 data: {
+                    '$fox': 'foxData',
                     message: 'Hello Vue!'
+                },
+                methods: {
+                    a(){}
                 },
                 mounted() {
                 },
                 updated() {
                 },
             })
+            console.log(app);
         }
     </script>
     <script src="./vue.js"></script>
