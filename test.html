@@ -2,53 +2,37 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <meta name="viewport" content="initial-scale=1" />
         <title>Document</title>
-        <style>
-            * {
-                margin: 0;
-            }
-            .box {
-                width: 7.5rem;
-                height: 1rem;
-                background-color: green;
-                box-sizing: border-box;
-            }
-            .test{
-                height: 1rem;
-                width: 50vw;
-                background-color: red;
-                margin-top: 50px;
-                margin-left: 0.4rem;
-            }
-            .btn{
-                height: 1px;
-                width: 50vw;
-                background-color: #000;
-                margin-top: 20px;
-                margin-left: 20px;
-            }
-        </style>
     </head>
     <body>
-        <div class="box"></div>
-        <div class="test"></div>
-        <div class="btn"></div>
+        <div id="app"></div>
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <script src="https://unpkg.com/vue-function-api/dist/vue-function-api.umd.js"></script>
         <script>
-            const meta = document.querySelector('meta[name="viewport"]');;
-            const html = document.documentElement;
-            const cliW = html.clientWidth;
-            const dpr = window.devicePixelRatio || 1;
-            meta.setAttribute('name', 'viewport');
-            meta.setAttribute(
-                'content',
-                `width=${cliW * dpr}, initial-scale=${1 /
-                    dpr} ,maximum-scale=${1 / dpr}, minimum-scale=${1 /
-                    dpr},user-scalable=no`
-            );
-            html.setAttribute('data-dpr', dpr);
-            html.style.fontSize = 100 / 750 * cliW * dpr + 'px';
+            const {value, plugin, onMounted} = vueFunctionApi;
+            Vue.use(plugin);
+            new Vue({
+                template: `
+                    <div>
+                    <span @click="test">count is {{ count }}</span>
+                    </div>
+                `,
+                setup() {
+                    const count = value(123);
+                    const test = () => {
+                        console.log('test');
+                    };
+                    onMounted(() => {
+                        console.log('mounted');
+                    });
+                    return {
+                        count,
+                        test
+                    };
+                }
+            }).$mount('#app');
         </script>
     </body>
 </html>
