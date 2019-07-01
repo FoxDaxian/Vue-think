@@ -87,8 +87,10 @@ export function _createElement (
     data.scopedSlots = { default: children[0] }
     children.length = 0
   }
+  // 用户自定义的render方法
   if (normalizationType === ALWAYS_NORMALIZE) {
     children = normalizeChildren(children)
+  // 通过template编译来的render方法
   } else if (normalizationType === SIMPLE_NORMALIZE) {
     children = simpleNormalizeChildren(children)
   }
