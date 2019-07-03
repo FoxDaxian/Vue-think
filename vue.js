@@ -3317,6 +3317,7 @@
             return;
         }
 
+        // _base是Vue构造函数
         var baseCtor = context.$options._base;
 
         // plain options object: turn it into a constructor
@@ -3591,6 +3592,7 @@
             }
         } else {
             // direct component options / constructor
+            // 参数列表: Ctor, data, context, children, tag
             vnode = createComponent(tag, data, context, children);
         }
         if (Array.isArray(vnode)) {
@@ -3709,6 +3711,7 @@
             // console.log('调用_render方法了', '============');
             var vm = this;
             var ref = vm.$options;
+            // 来自编译方法
             var render = ref.render;
             var _parentVnode = ref._parentVnode;
 
@@ -3730,6 +3733,7 @@
                 // separately from one another. Nested component's render fns are called
                 // when parent component is patched.
                 currentRenderingInstance = vm;
+                // 这里为render方法注入的 $createElement 方法
                 vnode = render.call(vm._renderProxy, vm.$createElement);
             } catch (e) {
                 handleError(e, vm, 'render');
@@ -4641,6 +4645,30 @@
         this.newDeps = [];
         this.depIds = new _Set();
         this.newDepIds = new _Set();
+        // watcher 有两种情况，new vue的时候 expOrFn为this._update(_render) 进行dom首次渲染
+        // 其他情况为获取当前watcher 值的结果，没有实际意义 
+
+
+        // 转换watch为监听的数据
+        // 一种是路径字符串，一种是函数
+        // 键路径
+        // 'a.b.c' => expOrFn, 第二个参数为cb，也就是set之后执行的函数
+        // vm.$watch('a.b.c', function (newVal, oldVal) {
+        //     // 做点什么
+        // })
+        
+        // 函数
+        // vm.$watch(
+        //     function () {
+        //     // 表达式 `this.a + this.b` 每次得出一个不同的结果时
+        //     // 处理函数都会被调用。
+        //     // 这就像监听一个未被定义的计算属性
+        //     return this.a + this.b
+        //     },
+        //     function (newVal, oldVal) {
+        //     // 做点什么
+        //     }
+        // )
         this.expression = expOrFn.toString();
         // parse expression for getter
         if (typeof expOrFn === 'function') {
@@ -4700,6 +4728,7 @@
      */
     Watcher.prototype.addDep = function addDep(dep) {
         var id = dep.id;
+        // 每个watcher只能加入到dep中一次，根据id判断做的 this.newDepIds.add(id);
         if (!this.newDepIds.has(id)) {
             this.newDepIds.add(id);
             this.newDeps.push(dep);
@@ -4765,6 +4794,13 @@
                 this.value = value;
                 if (this.user) {
                     try {
+                        // watcher的表达式
+                        // 比如下面监听的name
+                        // watcher: {
+                        //     name(val, oldVal) {
+                        //         this.someData = val
+                        //     }
+                        // }
                         this.cb.call(this.vm, value, oldValue);
                     } catch (e) {
                         handleError(
@@ -5399,6 +5435,7 @@
             var Super = this;
             var SuperId = Super.cid;
             var cachedCtors = extendOptions._Ctor || (extendOptions._Ctor = {});
+            // 如果缓存中有，那么直接返回
             if (cachedCtors[SuperId]) {
                 return cachedCtors[SuperId];
             }
@@ -5409,6 +5446,7 @@
             }
 
             var Sub = function VueComponent(options) {
+                // 调用Vue.prototype._init
                 this._init(options);
             };
             Sub.prototype = Object.create(Super.prototype);

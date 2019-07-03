@@ -5,19 +5,37 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <title>Document</title>
+        <style>
+            input {
+                display: none;
+            }
+            label {
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                box-sizing: border-box;
+                border: 1px solid red;
+                position: relative;
+            }
+            label:after {
+                display: none;
+                content: '';
+                position: absolute;
+                width: 5px;
+                height: 10px;
+                border: 1px solid transparent;
+                border-right-color: red;
+                border-bottom-color: red;
+                transform-origin: center center;
+                transform: rotate(45deg) translateX(-10%) translateY(-40%);
+            }
+            input:checked + label:after {
+                display: block;
+            }
+        </style>
     </head>
     <body>
-        <div class="a">123213</div>
-        <div class="b"></div>
-        <script>
-            const items = [
-                {id: 0, val: 'A'},
-                {id: 1, val: 'B'},
-                {id: 2, val: 'C'},
-                {id: 3, val: 'D'}
-            ];
-            items.push({id: 4, val: 'E'}).reverse();
-            console.log(items);
-        </script>
+        <input type="checkbox" id="sss" />
+        <label for="sss"></label>
     </body>
 </html>
