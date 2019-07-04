@@ -10,6 +10,7 @@
 
 <body>
     <div id="app">
+        {{a}}
         {{ message }}
     </div>
     <script>
@@ -25,14 +26,17 @@
                     message: 'Hello Vue!'
                 },
                 methods: {
-                    a(){}
                 },
                 computed: {
                     a() {
+                        console.log(123);
                         return this.message;
                     }
                 },
                 mounted() {
+                    setTimeout(() => {
+                            this.message = 123;
+                    }, 1000);
                 },
                 updated() {
                 },

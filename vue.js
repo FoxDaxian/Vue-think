@@ -7081,7 +7081,7 @@
                         }
                         // either not server-rendered, or hydration failed.
                         // create an empty node and replace it
-                        // 用vnode代替真是的node节点，并将vnode中的elm赋值为真实dom
+                        // 用vnode代替真实的node节点，并将vnode中的elm赋值为真实dom
                         oldVnode = emptyNodeAt(oldVnode);
                     }
 
