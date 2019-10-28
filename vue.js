@@ -5395,7 +5395,7 @@
             // additional parameters
             // 返回除了第一个之外的所有参数，也就是除了插件名之外的所有配置
             var args = toArray(arguments, 1);
-            // 参数第一个注入this
+            // 参数第一个注入this  也就是VUE
             args.unshift(this);
             if (typeof plugin.install === 'function') {
                 plugin.install.apply(plugin, args);
@@ -7017,7 +7017,6 @@
         }
 
         return function patch(oldVnode, vnode, hydrating, removeOnly) {
-            console.log(oldVnode, 'oldVnode是什么呀');
             // 如果新的vnode为空
             if (isUndef(vnode)) {
                 // 如果老的vnode存在

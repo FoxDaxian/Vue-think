@@ -6,36 +6,33 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <title>Document</title>
         <style>
-            input {
-                display: none;
-            }
-            label {
-                display: inline-block;
-                width: 20px;
-                height: 20px;
-                box-sizing: border-box;
+            .box {
+                padding: 10px;
+                width: 300px;
+                height: 500px;
                 border: 1px solid red;
-                position: relative;
             }
-            label:after {
-                display: none;
+            .box:after{
                 content: '';
-                position: absolute;
-                width: 5px;
-                height: 10px;
-                border: 1px solid transparent;
-                border-right-color: red;
-                border-bottom-color: red;
-                transform-origin: center center;
-                transform: rotate(45deg) translateX(-10%) translateY(-40%);
-            }
-            input:checked + label:after {
                 display: block;
+                clear: both;
+            }
+            .title {
+                float: left;
+                height: 100px;
+                width: 100%;
+                background-color: green;
+            }
+            .size {
+                height: 100%;
+                background-color: blue;
             }
         </style>
     </head>
     <body>
-        <input type="checkbox" id="sss" />
-        <label for="sss"></label>
+        <div class="box">
+            <div class="title">title</div>
+            <div class="size">size</div>
+        </div>
     </body>
 </html>

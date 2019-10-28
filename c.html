@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            const a = [
+                {
+                    path: '/check/product',
+                    name: '商品审核',
+                    oper_list: [
+                        {
+                            oper: 'r',
+                            oper_name: '读取'
+                        },
+                        {
+                            oper: 'update',
+                            oper_name: '更新'
+                        }
+                    ]
+                },
+                {
+                    path: '/check/record/shop',
+                    name: '店铺审核',
+                    oper_list: [
+                        {
+                            oper: 'view',
+                            oper_name: '页面查看'
+                        }
+                    ]
+                },
+                {
+                    path: '/check/review',
+                    name: '审核管理',
+                    oper_list: [
+                        {
+                            oper: 'view',
+                            oper_name: '页面查看'
+                        }
+                    ]
+                },
+                {
+                    path: '/check/review/seller',
+                    name: '身份审核',
+                    oper_list: [
+                        {
+                            oper: 'view',
+                            oper_name: '页面查看'
+                        }
+                    ]
+                },
+                {
+                    path: '/check',
+                    name: '审核后台',
+                    oper_list: [
+                        {
+                            oper: 'm',
+                            oper_name: '管理'
+                        }
+                    ]
+                },
+                {
+                    path: '/check/permission/user',
+                    name: '用户管理',
+                    oper_list: [
+                        {
+                            oper: 'm',
+                            oper_name: '管理'
+                        }
+                    ]
+                },
+                {
+                    path: '/check/permission/role',
+                    name: '角色管理',
+                    oper_list: [
+                        {
+                            oper: 'm',
+                            oper_name: '管理'
+                        }
+                    ]
+                },
+                {
+                    path: '/check/permission/permission',
+                    name: '权限管理',
+                    oper_list: [
+                        {
+                            oper: 'm',
+                            oper_name: '管理'
+                        }
+                    ]
+                },
+                {
+                    path: '/check/seller',
+                    name: '商户审核',
+                    oper_list: [
+                        {
+                            oper: 'r',
+                            oper_name: '读取'
+                        },
+                        {
+                            oper: 'update',
+                            oper_name: '更新'
+                        }
+                    ]
+                },
+                {
+                    path: '/check/shop',
+                    name: '店铺审核',
+                    oper_list: [
+                        {
+                            oper: 'r',
+                            oper_name: '读取'
+                        },
+                        {
+                            oper: 'update',
+                            oper_name: '更新'
+                        }
+                    ]
+                },
+                {
+                    path: '/check/review/product_junior',
+                    name: '商品初审',
+                    oper_list: [
+                        {
+                            oper: 'view',
+                            oper_name: '页面查看'
+                        }
+                    ]
+                },
+                {
+                    path: '/check/review/product_senior',
+                    name: '商品复审',
+                    oper_list: [
+                        {
+                            oper: 'view',
+                            oper_name: '页面查看'
+                        }
+                    ]
+                },
+                {
+                    path: '/check/permission',
+                    name: '权限管理',
+                    oper_list: [
+                        {
+                            oper: 'm',
+                            oper_name: '管理'
+                        }
+                    ]
+                },
+                {
+                    path: '/check/record',
+                    name: '审核记录',
+                    oper_list: [
+                        {
+                            oper: 'view',
+                            oper_name: '页面查看'
+                        }
+                    ]
+                },
+                {
+                    path: '/check/record/seller',
+                    name: '身份审核',
+                    oper_list: [
+                        {
+                            oper: 'view',
+                            oper_name: '页面查看'
+                        }
+                    ]
+                },
+                {
+                    path: '/check/record/product',
+                    name: '商品审核',
+                    oper_list: [
+                        {
+                            oper: 'view',
+                            oper_name: '页面查看'
+                        }
+                    ]
+                },
+                {
+                    path: '/check/review/shop',
+                    name: '店铺审核',
+                    oper_list: [
+                        {
+                            oper: 'view',
+                            oper_name: '页面查看'
+                        }
+                    ]
+                },
+                {
+                    path: '/check/product/2',
+                    name: '商品审核',
+                    oper_list: [
+                        {
+                            oper: 'r',
+                            oper_name: '读取'
+                        },
+                        {
+                            oper: 'update',
+                            oper_name: '更新'
+                        }
+                    ]
+                },
+                {
+                    path: '/check/record/shop/3',
+                    name: '店铺审核',
+                    oper_list: [
+                        {
+                            oper: 'view',
+                            oper_name: '页面查看'
+                        }
+                    ]
+                },
+                {
+                    path: '/check/review/4',
+                    name: '审核管理',
+                    oper_list: [
+                        {
+                            oper: 'view',
+                            oper_name: '页面查看'
+                        }
+                    ]
+                },
+                {
+                    path: '/check/review/seller/5',
+                    name: '身份审核',
+                    oper_list: [
+                        {
+                            oper: 'view',
+                            oper_name: '页面查看'
+                        }
+                    ]
+                },
+                {
+                    path: '/check1',
+                    name: '审核后台',
+                    oper_list: [
+                        {
+                            oper: 'm',
+                            oper_name: '管理'
+                        }
+                    ]
+                },
+                {
+                    path: '/check1/permission/user',
+                    name: '用户管理',
+                    oper_list: [
+                        {
+                            oper: 'm',
+                            oper_name: '管理'
+                        }
+                    ]
+                },
+                {
+                    path: '/check1/permission/role',
+                    name: '角色管理',
+                    oper_list: [
+                        {
+                            oper: 'm',
+                            oper_name: '管理'
+                        }
+                    ]
+                },
+                {
+                    path: '/check1/permission/permission',
+                    name: '权限管理',
+                    oper_list: [
+                        {
+                            oper: 'm',
+                            oper_name: '管理'
+                        }
+                    ]
+                },
+                {
+                    path: '/check1/seller',
+                    name: '商户审核',
+                    oper_list: [
+                        {
+                            oper: 'r',
+                            oper_name: '读取'
+                        },
+                        {
+                            oper: 'update',
+                            oper_name: '更新'
+                        }
+                    ]
+                },
+                {
+                    path: '/check1/shop',
+                    name: '店铺审核',
+                    oper_list: [
+                        {
+                            oper: 'r',
+                            oper_name: '读取'
+                        },
+                        {
+                            oper: 'update',
+                            oper_name: '更新'
+                        }
+                    ]
+                },
+                {
+                    path: '/check1/review/product_junior',
+                    name: '商品初审',
+                    oper_list: [
+                        {
+                            oper: 'view',
+                            oper_name: '页面查看'
+                        }
+                    ]
+                },
+                {
+                    path: '/check1/review/product_senior',
+                    name: '商品复审',
+                    oper_list: [
+                        {
+                            oper: 'view',
+                            oper_name: '页面查看'
+                        }
+                    ]
+                },
+                {
+                    path: '/check1/permission',
+                    name: '权限管理',
+                    oper_list: [
+                        {
+                            oper: 'm',
+                            oper_name: '管理'
+                        }
+                    ]
+                },
+                {
+                    path: '/check1/record',
+                    name: '审核记录',
+                    oper_list: [
+                        {
+                            oper: 'view',
+                            oper_name: '页面查看'
+                        }
+                    ]
+                },
+                {
+                    path: '/check1/record/seller',
+                    name: '身份审核',
+                    oper_list: [
+                        {
+                            oper: 'view',
+                            oper_name: '页面查看'
+                        }
+                    ]
+                },
+                {
+                    path: '/check1/record/product',
+                    name: '商品审核',
+                    oper_list: [
+                        {
+                            oper: 'view',
+                            oper_name: '页面查看'
+                        }
+                    ]
+                },
+                {
+                    path: '/check1/review/shop',
+                    name: '店铺审核',
+                    oper_list: [
+                        {
+                            oper: 'view',
+                            oper_name: '页面查看'
+                        }
+                    ]
+                },
+                {
+                    path: '/check/product/123',
+                    name: '商品审核',
+                    oper_list: [
+                        {
+                            oper: 'r',
+                            oper_name: '读取'
+                        },
+                        {
+                            oper: 'update',
+                            oper_name: '更新'
+                        }
+                    ]
+                },
+                {
+                    path: '/check/record/shop/345',
+                    name: '店铺审核',
+                    oper_list: [
+                        {
+                            oper: 'view',
+                            oper_name: '页面查看'
+                        }
+                    ]
+                },
+                {
+                    path: '/check2/review',
+                    name: '审核管理',
+                    oper_list: [
+                        {
+                            oper: 'view',
+                            oper_name: '页面查看'
+                        }
+                    ]
+                },
+                {
+                    path: '/check12/review/seller',
+                    name: '身份审核',
+                    oper_list: [
+                        {
+                            oper: 'view',
+                            oper_name: '页面查看'
+                        }
+                    ]
+                },
+                {
+                    path: '/check12',
+                    name: '审核后台',
+                    oper_list: [
+                        {
+                            oper: 'm',
+                            oper_name: '管理'
+                        }
+                    ]
+                },
+                {
+                    path: '/check12/permission/user',
+                    name: '用户管理',
+                    oper_list: [
+                        {
+                            oper: 'm',
+                            oper_name: '管理'
+                        }
+                    ]
+                },
+                {
+                    path: '/check12/permission/role',
+                    name: '角色管理',
+                    oper_list: [
+                        {
+                            oper: 'm',
+                            oper_name: '管理'
+                        }
+                    ]
+                },
+                {
+                    path: '/check12/permission/permission',
+                    name: '权限管理',
+                    oper_list: [
+                        {
+                            oper: 'm',
+                            oper_name: '管理'
+                        }
+                    ]
+                },
+                {
+                    path: '/check12/seller',
+                    name: '商户审核',
+                    oper_list: [
+                        {
+                            oper: 'r',
+                            oper_name: '读取'
+                        },
+                        {
+                            oper: 'update',
+                            oper_name: '更新'
+                        }
+                    ]
+                },
+                {
+                    path: '/check12/shop',
+                    name: '店铺审核',
+                    oper_list: [
+                        {
+                            oper: 'r',
+                            oper_name: '读取'
+                        },
+                        {
+                            oper: 'update',
+                            oper_name: '更新'
+                        }
+                    ]
+                },
+                {
+                    path: '/check12/review/product_junior',
+                    name: '商品初审',
+                    oper_list: [
+                        {
+                            oper: 'view',
+                            oper_name: '页面查看'
+                        }
+                    ]
+                },
+                {
+                    path: '/check12/review/product_senior',
+                    name: '商品复审',
+                    oper_list: [
+                        {
+                            oper: 'view',
+                            oper_name: '页面查看'
+                        }
+                    ]
+                },
+                {
+                    path: '/check12/permission',
+                    name: '权限管理',
+                    oper_list: [
+                        {
+                            oper: 'm',
+                            oper_name: '管理'
+                        }
+                    ]
+                },
+                {
+                    path: '/check12/record',
+                    name: '审核记录',
+                    oper_list: [
+                        {
+                            oper: 'view',
+                            oper_name: '页面查看'
+                        }
+                    ]
+                },
+                {
+                    path: '/check12/record/seller',
+                    name: '身份审核',
+                    oper_list: [
+                        {
+                            oper: 'view',
+                            oper_name: '页面查看'
+                        }
+                    ]
+                },
+                {
+                    path: '/check12/record/product',
+                    name: '商品审核',
+                    oper_list: [
+                        {
+                            oper: 'view',
+                            oper_name: '页面查看'
+                        }
+                    ]
+                },
+                {
+                    path: '/check12/review/shop',
+                    name: '店铺审核',
+                    oper_list: [
+                        {
+                            oper: 'view',
+                            oper_name: '页面查看'
+                        }
+                    ]
+                },
+                {
+                    path: '/check12/product/2',
+                    name: '商品审核',
+                    oper_list: [
+                        {
+                            oper: 'r',
+                            oper_name: '读取'
+                        },
+                        {
+                            oper: 'update',
+                            oper_name: '更新'
+                        }
+                    ]
+                },
+                {
+                    path: '/check12/record/shop/3',
+                    name: '店铺审核',
+                    oper_list: [
+                        {
+                            oper: 'view',
+                            oper_name: '页面查看'
+                        }
+                    ]
+                },
+                {
+                    path: '/check12/review/4',
+                    name: '审核管理',
+                    oper_list: [
+                        {
+                            oper: 'view',
+                            oper_name: '页面查看'
+                        }
+                    ]
+                },
+                {
+                    path: '/check12/review/seller/5',
+                    name: '身份审核',
+                    oper_list: [
+                        {
+                            oper: 'view',
+                            oper_name: '页面查看'
+                        }
+                    ]
+                },
+                {
+                    path: '/check121',
+                    name: '审核后台',
+                    oper_list: [
+                        {
+                            oper: 'm',
+                            oper_name: '管理'
+                        }
+                    ]
+                },
+                {
+                    path: '/check121/permission/user',
+                    name: '用户管理',
+                    oper_list: [
+                        {
+                            oper: 'm',
+                            oper_name: '管理'
+                        }
+                    ]
+                },
+                {
+                    path: '/check121/permission/role',
+                    name: '角色管理',
+                    oper_list: [
+                        {
+                            oper: 'm',
+                            oper_name: '管理'
+                        }
+                    ]
+                },
+                {
+                    path: '/check121/permission/permission',
+                    name: '权限管理',
+                    oper_list: [
+                        {
+                            oper: 'm',
+                            oper_name: '管理'
+                        }
+                    ]
+                },
+                {
+                    path: '/check121/seller',
+                    name: '商户审核',
+                    oper_list: [
+                        {
+                            oper: 'r',
+                            oper_name: '读取'
+                        },
+                        {
+                            oper: 'update',
+                            oper_name: '更新'
+                        }
+                    ]
+                },
+                {
+                    path: '/check121/shop',
+                    name: '店铺审核',
+                    oper_list: [
+                        {
+                            oper: 'r',
+                            oper_name: '读取'
+                        },
+                        {
+                            oper: 'update',
+                            oper_name: '更新'
+                        }
+                    ]
+                },
+                {
+                    path: '/check121/review/product_junior',
+                    name: '商品初审',
+                    oper_list: [
+                        {
+                            oper: 'view',
+                            oper_name: '页面查看'
+                        }
+                    ]
+                },
+                {
+                    path: '/check121/review/product_senior',
+                    name: '商品复审',
+                    oper_list: [
+                        {
+                            oper: 'view',
+                            oper_name: '页面查看'
+                        }
+                    ]
+                },
+                {
+                    path: '/check121/permission',
+                    name: '权限管理',
+                    oper_list: [
+                        {
+                            oper: 'm',
+                            oper_name: '管理'
+                        }
+                    ]
+                },
+                {
+                    path: '/check121/record',
+                    name: '审核记录',
+                    oper_list: [
+                        {
+                            oper: 'view',
+                            oper_name: '页面查看'
+                        }
+                    ]
+                },
+                {
+                    path: '/check121/record/seller',
+                    name: '身份审核',
+                    oper_list: [
+                        {
+                            oper: 'view',
+                            oper_name: '页面查看'
+                        }
+                    ]
+                },
+                {
+                    path: '/check121/record/product',
+                    name: '商品审核',
+                    oper_list: [
+                        {
+                            oper: 'view',
+                            oper_name: '页面查看'
+                        }
+                    ]
+                },
+                {
+                    path: '/check121/review/shop',
+                    name: '店铺审核',
+                    oper_list: [
+                        {
+                            oper: 'view',
+                            oper_name: '页面查看'
+                        }
+                    ]
+                }
+            ];
+
+            function tree(data) {
+                let obj = {},
+                    newArr = [];
+                data.forEach(item => {
+                    let index = item.path.split('/').length - 2;
+                    if (obj[index]) {
+                        obj[index].push(item);
+                    } else {
+                        obj[index] = [item];
+                    }
+                });
+                let len = Object.keys(obj).length;
+                while (len - 2 >= 0) {
+                    transNode(len - 2, len - 1);
+                    len--;
+                }
+                function transNode(pre, cur) {
+                    let preArr = obj[pre];
+                    let curArr = obj[cur];
+                    curArr.forEach(curItem => {
+                        let parentPath = curItem.path.split(/(?=\/\w*$)/)[0];
+                        preArr.forEach(preItem => {
+                            if (preItem.path == parentPath) {
+                                if (preItem.children) {
+                                    preItem.children.push(curItem);
+                                } else {
+                                    preItem.children = [curItem];
+                                }
+                            }
+                        });
+                    });
+                    if (pre == 0) {
+                        console.info(preArr);
+                    }
+                }
+            }
+
+            const start = performance.now();
+            console.log(tree(a));
+            const end = performance.now();
+            console.log(end - start);
+        </script>
+    </body>
+</html>
